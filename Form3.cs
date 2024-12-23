@@ -23,20 +23,12 @@ namespace SubsApp
 
             if (string.IsNullOrWhiteSpace(textBox1.Text) ||
                 string.IsNullOrWhiteSpace(textBox2.Text) ||
-                string.IsNullOrWhiteSpace(textBox3.Text) ||
+                string.IsNullOrWhiteSpace(maskedTextBox1.Text) ||
                 listBox1.SelectedItem == null)
             {
                 MessageBox.Show("Пожалуйста, заполните все поля.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-
-            if (!int.TryParse(textBox3.Text, out int phoneNumber))
-            {
-                MessageBox.Show("Номер телефона должен содержать только цифры.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
 
             string fio = textBox1.Text;
             string address = textBox2.Text;
@@ -62,7 +54,7 @@ namespace SubsApp
 
                         command.Parameters.AddWithValue("@FIO", fio);
                         command.Parameters.AddWithValue("@Address", address);
-                        command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
+                        command.Parameters.AddWithValue("@PhoneNumber", maskedTextBox1.Text);
                         command.Parameters.AddWithValue("@DelieveryTypeID", deliveryTypeId);
 
 

@@ -40,7 +40,7 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +50,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(140, 296);
+            this.button1.Location = new System.Drawing.Point(143, 385);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 31);
             this.button1.TabIndex = 0;
@@ -60,7 +60,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(259, 296);
+            this.button2.Location = new System.Drawing.Point(262, 385);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(113, 31);
             this.button2.TabIndex = 1;
@@ -70,7 +70,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(250, 108);
+            this.button3.Location = new System.Drawing.Point(250, 186);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 31);
             this.button3.TabIndex = 2;
@@ -82,9 +82,10 @@
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 92);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 170);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(232, 198);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
@@ -93,7 +94,7 @@
             this.textBox1.Location = new System.Drawing.Point(82, 12);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(290, 28);
+            this.textBox1.Size = new System.Drawing.Size(290, 22);
             this.textBox1.TabIndex = 4;
             // 
             // listBox1
@@ -101,7 +102,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(82, 46);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(290, 30);
+            this.listBox1.Size = new System.Drawing.Size(290, 108);
             this.listBox1.TabIndex = 5;
             // 
             // label1
@@ -116,7 +117,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 46);
+            this.label2.Location = new System.Drawing.Point(17, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 7;
@@ -124,16 +125,15 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(252, 179);
+            this.dateTimePicker1.Location = new System.Drawing.Point(252, 257);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(120, 20);
             this.dateTimePicker1.TabIndex = 8;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(250, 163);
+            this.label3.Location = new System.Drawing.Point(250, 241);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 9;
@@ -142,25 +142,31 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(250, 217);
+            this.label4.Location = new System.Drawing.Point(250, 295);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "Период выпуска:";
             // 
-            // textBox2
+            // listBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(253, 233);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(117, 20);
-            this.textBox2.TabIndex = 11;
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Items.AddRange(new object[] {
+            "Месяц",
+            "Полгода",
+            "Год",
+            "Полтора года"});
+            this.listBox2.Location = new System.Drawing.Point(252, 311);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(118, 56);
+            this.listBox2.TabIndex = 12;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 336);
-            this.Controls.Add(this.textBox2);
+            this.ClientSize = new System.Drawing.Size(381, 426);
+            this.Controls.Add(this.listBox2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dateTimePicker1);
@@ -195,6 +201,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ListBox listBox2;
     }
 }

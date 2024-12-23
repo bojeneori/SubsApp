@@ -18,11 +18,6 @@ namespace SubsApp
             InitializeComponent();
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form4_Load(object sender, EventArgs e)
         {
             try
@@ -82,15 +77,20 @@ namespace SubsApp
                     return;
                 }
 
-
-                if (!int.TryParse(textBox1.Text, out int cardNumber))
+                if (!checkBox1.Checked)
                 {
-                    MessageBox.Show("Введите корректный номер карты.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Внесите полную предоплату", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (maskedTextBox1.Text == null)
+                {
+                    MessageBox.Show("Введите номер банковской карты", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
 
-                string subTime = textBox2.Text.Trim();
+                string subTime = listBox3.Text.Trim();
                 if (string.IsNullOrEmpty(subTime))
                 {
                     MessageBox.Show("Введите срок подписки.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -102,7 +102,7 @@ namespace SubsApp
                 int journalID = Convert.ToInt32(listBox2.SelectedValue);
 
 
-                bool isPaid = radioButton1.Checked; 
+                bool isPaid = checkBox1.Checked; 
 
 
                 using (NpgsqlConnection connection = new NpgsqlConnection("server=localhost; database=Subs; user Id=postgres; password=admin"))
@@ -117,7 +117,7 @@ namespace SubsApp
                         command.Parameters.AddWithValue("@clientID", clientID);
                         command.Parameters.AddWithValue("@journalID", journalID);
                         command.Parameters.AddWithValue("@Payment", isPaid);
-                        command.Parameters.AddWithValue("@CardNumber", cardNumber);
+                        command.Parameters.AddWithValue("@CardNumber", maskedTextBox1.Text);
                         command.Parameters.AddWithValue("@SubTime", subTime);
 
                         command.ExecuteNonQuery();
@@ -136,5 +136,6 @@ namespace SubsApp
         {
             this.Close();
         }
+
     }
 }

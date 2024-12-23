@@ -1,13 +1,8 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SubsApp
@@ -17,49 +12,7 @@ namespace SubsApp
         public Form2()
         {
             InitializeComponent();
-            LoadData();
-        }
-        private void LoadData()
-        {
-            string connectionString = "server=localhost; database=Subs; user Id =postgres; password =admin ";
-            string query = "SELECT id, \"Name\" FROM public.\"Publishers\"";
 
-            try
-            {
-                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-                    {
-                        using (NpgsqlDataReader reader = command.ExecuteReader())
-                        {
-                            listBox1.DataSource = null;
-                            listBox1.Items.Clear();
-
-
-                            var publishers = new List<Publisher>();
-
-                            while (reader.Read())
-                            {
-                                publishers.Add(new Publisher
-                                {
-                                    ID = reader.GetInt32(0),
-                                    Name = reader.GetString(1)
-                                });
-                            }
-
-                            listBox1.DataSource = publishers;
-                            listBox1.DisplayMember = "Name";
-                            listBox1.ValueMember = "ID";
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка загрузки издателей: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         public class Publisher
@@ -91,11 +44,6 @@ namespace SubsApp
             }
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private byte[] ImageToByteArray(Image image)
         {
             using (MemoryStream ms = new MemoryStream())
@@ -109,7 +57,7 @@ namespace SubsApp
         {
 
             if (string.IsNullOrEmpty(textBox1.Text) ||
-                string.IsNullOrEmpty(textBox2.Text) ||
+                string.IsNullOrEmpty(listBox2.Text) ||
                 pictureBox1.Image == null ||
                 listBox1.SelectedItem == null)
             {
@@ -120,7 +68,7 @@ namespace SubsApp
 
             string name = textBox1.Text;
             DateTime lastArrival = dateTimePicker1.Value;
-            string releasePeriod = textBox2.Text;
+            string releasePeriod = listBox2.Text;
             byte[] logo = ImageToByteArray(pictureBox1.Image); 
             int publisherID = (int)listBox1.SelectedValue; 
 
@@ -157,6 +105,46 @@ namespace SubsApp
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            string connectionString = "server=localhost; database=Subs; user Id =postgres; password =admin ";
+            string query = "SELECT id, \"Name\" FROM public.\"Publishers\"";
+
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                    {
+                        using (NpgsqlDataReader reader = command.ExecuteReader())
+                        {
+                            listBox1.DataSource = null;
+                            listBox1.Items.Clear();
+
+
+                            var publishers = new List<Publisher>();
+
+                            while (reader.Read())
+                            {
+                                publishers.Add(new Publisher
+                                {
+                                    ID = reader.GetInt32(0),
+                                    Name = reader.GetString(1)
+                                });
+                            }
+
+                            listBox1.DataSource = publishers;
+                            listBox1.DisplayMember = "Name";
+                            listBox1.ValueMember = "ID";
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка загрузки издателей: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
     }
